@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voucher Terme di Saturnia</title>
+  <style>
+    :root {
+      --bg: #dff0ed;
+      --card: #ffffff;
+      --text: #184f53;
+      --muted: #4f7e81;
+      --accent: #2d8f89;
+      --accent-dark: #1f6d68;
+      --border: #b8ddd8;
+      --ring: rgba(45, 143, 137, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Gill Sans", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .card {
+      width: min(100%, 440px);
+      background: var(--card);
+      border-radius: 16px;
+      padding: 22px 18px;
+      border: 1px solid var(--border);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.35rem, 5.4vw, 1.85rem);
+      line-height: 1.2;
+      text-align: center;
+      color: var(--accent-dark);
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.45;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .badge {
+      margin: 0 auto 14px;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: #e7f5f2;
+      color: #1a706a;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    form {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #2d6d70;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-size: 1rem;
+      color: var(--text);
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--ring);
+    }
+
+    button {
+      margin-top: 4px;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent);
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    button:active {
+      filter: brightness(1.04);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.55s ease both;
+    }
+
+    .loading-wrap {
+      padding: 26px 8px 8px;
+      text-align: center;
+    }
+
+    .loading-text {
+      margin-top: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto;
+      border: 4px solid #d7ece8;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: clamp(1.08rem, 4.4vw, 1.35rem);
+      color: #145a5e;
+      font-weight: 700;
+    }
+
+    .scene-img {
+      margin: 14px auto 4px;
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .ps5-img {
+      margin: 18px auto 4px;
+      width: min(90%, 320px);
+      max-height: 240px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spinner {
+        animation: none;
+      }
+
+      .fade-in {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <section id="step1">
+      <div class="badge">Terme di Saturnia</div>
+      <h1>Valida il tuo voucher</h1>
+      <p>Inserisci i tuoi dati per scoprire il regalo speciale.</p>
+      <img class="scene-img" src="./saturnia.jpg" alt="Piscine termali di Saturnia">
+
+      <form id="voucherForm">
+        <div>
+          <label for="nome">Nome</label>
+          <input id="nome" name="nome" type="text" autocomplete="given-name" required>
+        </div>
+        <div>
+          <label for="cognome">Cognome</label>
+          <input id="cognome" name="cognome" type="text" autocomplete="family-name" required>
+        </div>
+        <button type="submit">OK</button>
+      </form>
+    </section>
+
+    <section id="loadingStep" class="hidden">
+      <div class="badge">Terme di Saturnia</div>
+      <div class="loading-wrap">
+        <div class="spinner" aria-hidden="true"></div>
+        <p class="loading-text">Convalida voucher in corso...</p>
+      </div>
+    </section>
+
+    <section id="step2" class="hidden">
+      <div class="badge">Voucher convalidato</div>
+      <h1 id="greeting">Sorpresa!</h1>
+      <p class="message">
+        Secondo te potevamo regalarti le terme per il tuo compleanno.
+        Preparati che verremo tutti a casa tua a giocare con la tua nuova Playstation 5.
+      </p>
+      <img class="ps5-img" src="./ps5.webp" alt="PlayStation 5">
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("voucherForm");
+    const step1 = document.getElementById("step1");
+    const loadingStep = document.getElementById("loadingStep");
+    const step2 = document.getElementById("step2");
+    const greeting = document.getElementById("greeting");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const nome = document.getElementById("nome").value.trim();
+      const cognome = document.getElementById("cognome").value.trim();
+
+      if (!nome || !cognome) return;
+
+      greeting.textContent = "Ciao " + nome + " " + cognome + "!";
+      step1.classList.add("hidden");
+      loadingStep.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setTimeout(function () {
+        loadingStep.classList.add("hidden");
+        step2.classList.remove("hidden");
+        step2.classList.add("fade-in");
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
